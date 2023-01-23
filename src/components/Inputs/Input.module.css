@@ -1,0 +1,211 @@
+.head_txt {
+	color: var(--txt-col);
+}
+
+.labelContainer {
+	--validate-display: none;
+	display: grid;
+	grid-template-columns: max-content 1fr;
+	justify-items: start;
+	padding-bottom: 2vh;
+}
+
+.labelContainer * {
+	pointer-events: none;
+}
+
+.label_txt {
+	--fs: 1.75rem;
+	position: relative;
+	font-size: var(--fs);
+	transition: --outline-label-width 0.4s linear;
+}
+
+.label_outline {
+	position: absolute;
+
+	height: 3px;
+	top: calc(50% + var(--fs) / 2 + 4px); /*🤯🤯🤯 almost perfect*/
+	left: 1%;
+	width: 100%;
+
+	background-color: white;
+	box-shadow: 0px 1px 1px var(--txt-col);
+	transform: scaleX(0);
+	transform-origin: left;
+	transition: transform 250ms ease-out;
+}
+
+.expanded_outline > .label_outline {
+	transform: scaleX(1);
+}
+
+.input_container {
+	--fs: 1.5rem;
+	--pfs: 1.15rem;
+	display: grid;
+	position: relative;
+	height: min-content;
+}
+
+.inputs:not([type='file']) {
+	position: relative;
+	height: 2rem;
+	width: clamp(200px, 80%, 300px);
+
+	border-radius: 8px;
+	border: 2px solid var(--dk-txt-col);
+	padding: 0.5rem 0;
+	padding-left: calc(var(--fs) * 2);
+	box-shadow: inset 1px 1px 3px var(--dk-txt-col-t6), inset -1px -1px 3px var(--dk-txt-col-t6);
+
+	background: var(--txt-col);
+	font-size: var(--fs);
+	color: var(--dk-txt-col);
+}
+
+.inputs::placeholder {
+	font-size: var(--pfs);
+	color: var(--dk-txt-col-t6);
+}
+.inputs:focus {
+	border-color: var(--txt-col);
+	box-shadow: -1px 2px 1px 2px var(--dk-txt-col), -2px 3px 0px 4px var(--txt-col-t6);
+}
+.inputs:focus::placeholder {
+	color: transparent;
+}
+.inputs:placeholder-shown {
+	font-size: var(--pfs);
+}
+
+.inputIcon {
+	position: absolute;
+
+	top: 5px;
+	left: 5px;
+	bottom: 5px;
+	width: var(--fs);
+
+	color: var(--dk-txt-col-t6);
+
+	display: grid;
+	place-items: center;
+	padding: 0 calc(var(--fs) / 2);
+
+	color: var(--dk-txt-col-t6);
+	font-size: calc(var(--fs) - 0.3rem);
+}
+
+.inputEyeIcon {
+	position: absolute;
+
+	top: 5px;
+	left: clamp(200px, 80%, 300px);
+	bottom: 5px;
+	width: var(--fs);
+
+	display: grid;
+	place-items: center;
+	padding: 0 calc(var(--fs) / 2);
+
+	color: var(--dk-txt-col);
+	font-size: calc(var(--fs) - 0.2rem);
+}
+
+.inputValidate {
+	position: relative;
+}
+
+.inputValidate::before {
+	position: absolute;
+	display: var(--validate-display);
+	font-family: 'Font Awesome 5 Free';
+	font-weight: 900;
+	content: '\f621';
+	left: 105%;
+	font-size: 0.8em;
+	color: var(--txt-col);
+	pointer-events: none;
+}
+
+.labelContainer:hover .inputValidate::before {
+	color: var(--error-red);
+}
+
+.ValidateMsg {
+	--fs: 1rem;
+	--step1Time: 400ms;
+	--step2Time: 250ms;
+	position: absolute;
+	top: -5px;
+	display: grid;
+
+	width: max-content;
+	height: calc(var(--fs) * 6);
+	opacity: 0.001;
+	z-index: 1;
+	transition: opacity var(--step1Time) cubic-bezier(0.17, 0.16, 0, 1) var(--step2Time);
+	/*very fast start, slow end*/
+}
+
+.ValidateMsg > .triangle1 {
+	position: absolute;
+	top: calc(50% - 18px);
+	left: -40px;
+	border: 20px solid transparent;
+	border-right-color: var(--txt-col);
+}
+
+.ValidateMsg > .triangle2 {
+	position: absolute;
+	top: calc(50% - 19px);
+	left: -44px;
+	border: 23px solid transparent;
+	border-right-color: hsl(0, 0%, 95%, 50%);
+	filter: blur(1px);
+}
+
+.invalidMsgContainer {
+	--fs: 1rem;
+	display: grid;
+	grid-template-columns: 1fr;
+	align-items: center;
+	justify-items: start;
+	width: max-content;
+	padding-right: var(--fs);
+
+	border-radius: 10px;
+	box-shadow: -1px 1px 3px 2px hsl(0, 0%, 95%, 30%);
+	background: var(--txt-col);
+
+	transform: scaleX(0.35);
+	transform-origin: left;
+	transition: transform var(--step1Time) ease-out var(--step2Time);
+}
+
+.InvalidMsgText {
+	--row: 0ms;
+	font-size: var(--fs);
+	color: var(--dk-txt-col);
+	padding-left: var(--fs);
+	opacity: 0.01;
+	transform: translateX(var(--fs));
+	transition: opacity var(--step1Time) ease-out, transform var(--step1Time) ease-out;
+}
+
+.labelContainer:hover .ValidateMsg {
+	opacity: 1;
+	transition-delay: 0ms;
+}
+
+.labelContainer:hover .invalidMsgContainer {
+	transform: scaleX(1);
+	transition-delay: 0ms;
+}
+
+.labelContainer:hover .InvalidMsgText {
+	transition-delay: calc(var(--step1Time) + var(--row));
+	opacity: 1;
+	transform: translateX(0px);
+}

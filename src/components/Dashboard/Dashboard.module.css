@@ -1,0 +1,106 @@
+#Dashboard {
+	place-self: center;
+	display: grid;
+	width: 75%;
+	min-width: 900px;
+	height: 80%;
+	min-height: 720px;
+
+	grid-template-columns: 20% 80%;
+	grid-template-rows: 1fr;
+
+	background: radial-gradient(circle at center, hsl(240, 11%, 11%), hsl(225, 13%, 13%));
+	border-radius: 15px;
+	box-shadow: 0px 1px 5px 2px var(--txt-col-t6);
+}
+
+#sidebar {
+	position: relative;
+	display: grid;
+
+	grid-template-columns: 1fr;
+
+	background-color: var(--dk-txt-col);
+	border-radius: 15px;
+	border-top-right-radius: 0px;
+	border-bottom-right-radius: 0px;
+}
+
+.user_role {
+	grid-template-rows: min-content repeat(5, 1fr);
+}
+.admin_role {
+	grid-auto-rows: min-content;
+}
+
+#sidebar::after {
+	content: '';
+	position: absolute;
+	top: 0px;
+	right: -3px;
+	bottom: 0px;
+	width: 3px;
+
+	background: linear-gradient(to right, var(--txt-col), transparent);
+}
+
+.sidebar_content {
+	display: grid;
+	padding: 2.25rem 0rem;
+	place-items: center;
+
+	color: var(--txt-col);
+	font-size: 1.5rem;
+	border-bottom-left-radius: 15px;
+	border-top-left-radius: 15px;
+
+	border-bottom: 2px solid var(--txt-col);
+}
+
+.sidebar_content:focus,
+.sidebar_content:active,
+.sidebar_content:hover {
+	color: var(--txt-col);
+}
+
+.sidebar_button {
+	text-align: center;
+}
+
+.sidebar_content:not(:first-child):hover {
+	background-color: var(--txt-col);
+	color: var(--dk-txt-col);
+	box-shadow: -2px 2px 1px 1px var(--dk-txt-col), -3px 3px 0px 2px var(--txt-col-t6);
+}
+
+#main_content {
+	position: relative;
+	display: grid;
+	width: 100%;
+	height: 100%;
+	grid-template-columns: 1fr;
+}
+
+#back_button {
+	position: absolute;
+	top: 1rem;
+	left: 1rem;
+
+	width: 2rem;
+	height: 2rem;
+	border-radius: 50%;
+	display: grid;
+	place-items: center;
+}
+
+#back_button > svg {
+	font-size: 1.5rem;
+	color: var(--txt-col);
+}
+#back_button:hover {
+	background-color: var(--txt-col);
+}
+
+#back_button:hover > svg {
+	color: var(--dk-txt-col);
+}

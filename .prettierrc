@@ -1,0 +1,9 @@
+{
+  "printWidth": 120,
+  "bracketSpacing": true,
+  "editorconfig": false,
+  "tabWidth": 4,
+  "useTabs": true,
+  "quoteProps": "preserve",
+  "singleQuote": true
+}

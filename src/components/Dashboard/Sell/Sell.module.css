@@ -1,0 +1,89 @@
+#sell_page {
+	--grid-widths: 4ch 10ch 7ch 7ch 7ch 13ch;
+	--table-width: calc(48ch + 6rem);
+	place-self: center start;
+	padding-left: 4rem;
+	height: 95%;
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: auto 80px;
+	place-items: center start;
+	gap: 2rem;
+}
+
+#sell_page > #add_property {
+	place-self: center;
+	display: grid;
+	width: clamp(100px, 50%, 150px);
+	height: 40px;
+	border-radius: 15px;
+	background: var(--txt-col);
+	box-shadow: -2px 2px 1px 1px var(--dk-txt-col), -3px 3px 0px 2px var(--txt-col-t6);
+	transition: transform 75ms linear;
+}
+
+#add_property > svg {
+	place-self: center;
+	font-size: 1.5rem;
+}
+
+#add_property:hover {
+	transform: scale(1.05) translateY(-5px);
+}
+
+#add_property_form {
+	position: relative;
+	padding: 1rem;
+	place-self: start center;
+	width: 80%;
+	display: grid;
+	place-items: center;
+	grid-template-columns: 40% 40%;
+	grid-auto-rows: 1fr;
+	gap: 2rem;
+}
+
+.input_container {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 1fr 1fr;
+}
+
+.input_container > button {
+	place-self: center;
+	grid-row: 2/3;
+
+	width: 100%;
+	height: 40px;
+
+	font-size: 1.4rem;
+	color: var(--txt-col);
+
+	border: none;
+	border-radius: 15px;
+	box-shadow: -2px 2px 1px 1px var(--dk-txt-col), -3px 3px 0px 2px var(--txt-col-t6);
+	background: var(--light-green);
+	color: var(--dk-txt-col);
+	transition: transform 75ms linear;
+}
+
+.input_container > button:hover,
+.input_container > button:focus {
+	transform: scale(1.1);
+}
+
+#actionButtons {
+	grid-template-rows: 1fr 1fr;
+}
+
+#actionButtons > button:first-child {
+	grid-row: 1/2;
+}
+
+#actionButtons > button:last-child {
+	grid-row: 2/3;
+	background-color: var(--error-red);
+}

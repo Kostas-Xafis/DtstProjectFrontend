@@ -1,0 +1,15 @@
+#taxes_page {
+	--grid-widths: 4ch 10ch 8ch 10ch 10ch;
+	--table-width: calc(42ch + 5rem);
+	place-self: center;
+	width: 80%;
+	height: 95%;
+	max-height: 720px;
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: auto 80px;
+	place-items: center start;
+	gap: 2rem;
+
+	overflow-y: auto;
+}

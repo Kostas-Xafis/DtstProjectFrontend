@@ -1,0 +1,170 @@
+@import url('//use.fontawesome.com/releases/v5.15.3/css/all.css');
+
+#root {
+	font-family: 'Poppins', 'Courier New', Courier, monospace;
+	display: grid;
+	min-height: 100vh;
+	width: 100%;
+
+	--fs: 1.2rem;
+	--txt-col: hsl(0, 0%, 95%);
+	--txt-col-t8: hsl(0, 0%, 95%, 80%);
+	--txt-col-t6: hsl(0, 0%, 95%, 60%);
+	--txt-col-t4: hsl(0, 0%, 95%, 40%);
+	--txt-col-t2: hsl(0, 0%, 95%, 20%);
+	--dk-txt-col: hsl(240, 11%, 11%);
+	--dk-txt-col-t6: hsl(240, 11%, 11%, 60%);
+	--dk-txt-col-t4: hsl(240, 11%, 11%, 40%);
+
+	--error-red: hsl(0, 100%, 69%);
+	--light-green: hsl(138, 67%, 63%);
+	background: radial-gradient(circle at center, hsl(222, 15%, 15%), hsl(240, 11%, 11%) 80%);
+}
+
+#root_page {
+	width: 100%;
+	height: 100%;
+	display: grid;
+	place-items: center;
+}
+
+#links_container {
+	display: grid;
+	width: 33.33%;
+	min-width: 200px;
+	padding: 2rem 1rem;
+
+	background: radial-gradient(circle at center, hsl(240, 11%, 11%), hsl(225, 13%, 13%));
+	border-radius: 15px;
+	box-shadow: 0px 2px 5px 2px rgb(0, 0, 0, 30%);
+
+	grid-template-columns: 1fr;
+	grid-template-rows: 1fr 1fr;
+
+	place-items: center;
+}
+
+.links {
+	padding: 5%;
+	display: grid;
+	place-items: space-evenly;
+}
+
+.links > button {
+	width: 100%;
+	min-width: 200px;
+	font-size: 2.2rem;
+	padding: 0.75rem 0.5rem;
+
+	background: var(--txt-col);
+	color: var(--dk-txt-col);
+
+	border-radius: 15px;
+	box-shadow: -1px 2px 1px 2px var(--dk-txt-col), -2px 3px 0px 4px var(--txt-col-t6);
+	transition: transform 100ms linear;
+}
+
+.links > button:hover {
+	transform: translateY(-5px);
+}
+
+button {
+	all: unset;
+	cursor: pointer;
+	text-align: center;
+}
+input {
+	outline: none !important;
+}
+input[type='password']::-ms-reveal,
+input[type='password']::-ms-clear {
+	display: none;
+}
+
+* {
+	font-family: 'Poppins', sans-serif;
+	margin: 0;
+	padding: 0;
+}
+
+::-webkit-scrollbar {
+	width: 7px;
+	height: 7px;
+}
+::-webkit-scrollbar-button {
+	width: 5px;
+	color: transparent;
+}
+::-webkit-scrollbar-thumb {
+	background-color: var(--dk-txt-col);
+	border-radius: 15px;
+}
+::-webkit-scrollbar-track {
+	border-radius: 15px;
+	background: var(--dk-txt-col-t4);
+}
+
+::-webkit-scrollbar-corner {
+	width: 5px;
+	color: transparent;
+}
+
+a,
+a:active,
+a:focus,
+a:hover {
+	color: black;
+	text-decoration: none !important;
+}
+
+.reverse_anim {
+	animation: var(--animName) var(--animTime) reverse forwards var(--animTimeFunc) var(--animDelay);
+}
+
+.restartable_anim {
+	animation: var(--animName) var(--animTime) forwards var(--animTimeFunc) var(--animDelay);
+}
+
+@keyframes SuspenseAnimation {
+	0% {
+		background-position: right;
+	}
+	100% {
+		background-position: left;
+	}
+}
+
+#root .suspense {
+	box-shadow: none;
+	border: none;
+
+	border-radius: 15px;
+
+	background: repeating-linear-gradient(120deg, var(--txt-col-t6) 80%, var(--txt-col-t4) 90%, var(--txt-col-t6) 100%),
+		linear-gradient(var(--txt-col-t4), var(--txt-col-t4)), linear-gradient(var(--dk-txt-col), var(--dk-txt-col));
+	background-size: 500%;
+	background-position: right;
+	animation: SuspenseAnimation 15s infinite linear;
+}
+
+#root .suspense .suspense {
+	box-shadow: 0px 1px 2px 1px var(--dk-txt-col-t4);
+}
+
+#root .nosuspense {
+	box-shadow: none;
+	border: none;
+	background: transparent;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+	-moz-appearance: textfield;
+}
