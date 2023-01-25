@@ -9,7 +9,7 @@ const TaxAdministration = () => {
 		<Delete
 			{...{
 				text: 'Do you want to reset this tax declaration?',
-				path: '/api/tax_declaration/' + id,
+				path: '/api/tax_declaration/reset/' + id,
 				btnText: 'Reset',
 			}}
 		/>
