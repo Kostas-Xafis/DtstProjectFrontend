@@ -20,10 +20,6 @@ export type NoResponse = {
 	message?: string;
 };
 
-type JsonResponse<ExpectedResponse> = ExpectedResponse & {
-	error?: string | null; //Check postman to see the actual response
-};
-
 export function useFetch<T = NoResponse>(request: ApiFetch<T>, expectResponse: boolean = true) {
 	const [data, setData] = useState<ApiFetch<T>>(request);
 	const { authData } = useContext(AuthContext);
@@ -40,14 +36,16 @@ export function useFetch<T = NoResponse>(request: ApiFetch<T>, expectResponse: b
 					},
 				});
 				if (response.status >= 400) {
-					return setData({ error: { status: response.status, message: (await response.text()) || '' } });
+					const text = await response.text();
+					const message = text ? JSON.parse(text) : {};
+					return setData({ error: { status: response.status, ...message } });
 				}
 				const json = (await response.json()) as T;
 				//It's empty on user update and it throws error
-				if (expectResponse) setData({ response: json });
-				else setData({ response: { message: 'Successful request', ...json } });
+				setData({ response: json });
 			})();
 		}
+		if (data.error) console.log('UseFetch error:', data.error);
 		if (data.response) console.log('UseFetch response:', data.response);
 	}, [data.request]);
 	return [data, setData] as const;

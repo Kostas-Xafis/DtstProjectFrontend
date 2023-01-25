@@ -1,0 +1,72 @@
+#tables_page {
+	place-self: center;
+	width: 80%;
+	height: 95%;
+	max-height: 720px;
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-auto-rows: auto;
+	place-items: start center;
+	gap: 2rem;
+
+	overflow-y: auto;
+}
+
+#tables_page::-webkit-scrollbar-thumb {
+	background-color: var(--txt-col);
+	border-radius: 15px;
+}
+#tables_page::-webkit-scrollbar-track {
+	border-radius: 15px;
+	background: var(--txt-col-t4);
+}
+
+#tables_page > div:nth-child(1) {
+	--grid-widths: 4ch 10ch 10ch 10ch 15ch 10ch 12ch 12ch 12ch 12ch;
+	--table-width: calc(107ch + 10rem);
+}
+
+#tables_page > div:nth-child(2) {
+	--grid-widths: 4ch 4ch 10ch 7ch 7ch 7ch 13ch;
+	--table-width: calc(52ch + 7rem);
+}
+
+#tables_page > div:nth-child(3) {
+	--grid-widths: 4ch 8ch 8ch 8ch 8ch 9ch 9ch 10ch 10ch;
+	--table-width: calc(74ch + 9rem);
+}
+
+#admin_actions {
+	display: grid;
+	grid-template-rows: 1fr 1fr;
+	place-items: center;
+	gap: 2rem 0;
+}
+
+#admin_actions > p {
+	font-size: 1.5rem;
+	color: var(--txt-col);
+}
+
+#admin_actions > button {
+	place-self: center;
+	grid-row: 2/3;
+
+	width: 250px;
+	height: 50px;
+
+	font-size: 1.4rem;
+	color: var(--txt-col);
+
+	border: none;
+	border-radius: 15px;
+	box-shadow: -2px 2px 1px 1px var(--dk-txt-col), -3px 3px 0px 2px var(--txt-col-t6);
+	background: var(--error-red);
+	color: var(--dk-txt-col);
+	transition: transform 75ms linear;
+}
+
+#admin_actions > button:hover,
+#admin_actions > button:focus {
+	transform: scale(1.05);
+}

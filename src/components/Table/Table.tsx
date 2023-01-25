@@ -7,32 +7,41 @@ type TableProps<T> = {
 	columns: Array<[string, keyof T]>;
 	rows: T[] | undefined;
 	onClickRow?: (e: React.SyntheticEvent) => {};
+	processDataColumn?: { [P in keyof T]: (val: T[P]) => string | number };
 };
 
 const Table = <T extends { id?: number }>(): FC<TableProps<T>> => {
-	return <T extends { id?: number }>({ name, columns, rows, onClickRow }: TableProps<T>) => {
+	return <T extends { id?: number }>({ name, columns, rows, onClickRow, processDataColumn }: TableProps<T>) => {
 		return rows?.length ? (
 			<div className={css.table_container}>
 				<p className={css.table_name}>{name}</p>
 				<div className={css.table}>
 					<div className={css.table_col}>
-						{columns.map((val, i) => (
+						{columns.map((columnName, i) => (
 							<div className={css.table_value} key={i}>
-								<p>{val[0]}</p>
+								<p>{columnName[0]}</p>
 							</div>
 						))}
+						<div className={css.rowBottomBorder}></div>
 					</div>
 					<div className={css.table_rows}>
 						{rows.map((row, i) => (
 							<div data-id={row.id} onClick={onClickRow} className={css.table_row} key={i}>
-								{Object.values(row).map((val, i) => {
-									if (i >= columns.length) return <React.Fragment key={i}></React.Fragment>;
+								{Object.values(row).map((val, j) => {
+									if (j >= columns.length) return <React.Fragment key={j}></React.Fragment>;
+									const columnName = columns[j][1];
+									const rowValue = row[columnName];
 									return (
-										<div className={css.table_value} key={i}>
-											<p>{row[columns[i][1]] as string | number}</p>
+										<div className={css.table_value} key={j}>
+											{processDataColumn && processDataColumn[columnName] ? (
+												<p>{processDataColumn[columnName](rowValue)} </p>
+											) : (
+												<p>{rowValue as string | number}</p>
+											)}
 										</div>
 									);
 								})}
+								<div className={css.rowBottomBorder}></div>
 							</div>
 						))}
 					</div>
@@ -55,5 +64,6 @@ const Table = <T extends { id?: number }>(): FC<TableProps<T>> => {
 
 export default Table;
 
-export const RealEstateTable = Table<RealEstate>();
-export const UserTable = Table<User>();
+export const RealEstateTable = Table<Partial<RealEstate>>();
+export const UserTable = Table<Partial<User>>();
+export const TaxesTable = Table<Partial<TaxDeclaration>>();

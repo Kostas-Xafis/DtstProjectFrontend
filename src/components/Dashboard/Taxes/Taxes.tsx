@@ -5,15 +5,11 @@ import { AuthContext } from '../../Index';
 import Table from '../../Table/Table';
 import css from './Taxes.module.css';
 
-export type TaxRole = 'Seller' | 'Buyer' | "Seller's Notary" | "Buyer's Notary";
-
 type TaxDeclarationRole = Partial<TaxDeclaration & { role: TaxRole }>;
-
-export const TaxesTable = Table<TaxDeclarationRole>();
 
 const columnNames: Array<[string, keyof TaxDeclarationRole]> = [
 	['Id', 'id'],
-	['Statement', 'declaration_content'],
+	['Content', 'declaration_content'],
 	['Accepted', 'accepted'],
 	['Completed', 'completed'],
 	['Role', 'role'],
@@ -28,6 +24,8 @@ const assignRole = (role: TaxRole, list?: TaxDeclaration[]): TaxDeclarationRole[
 	}) as TaxDeclarationRole[];
 };
 
+const TaxesTable = Table<TaxDeclarationRole>();
+
 const Taxes = () => {
 	const location = useLocation();
 	const { buyerNotaryList, buyerTaxDeclarationList, sellerNotaryList, sellerTaxDeclarationList } =
@@ -36,32 +34,39 @@ const Taxes = () => {
 	const taxList = [
 		...assignRole("Seller's Notary", sellerNotaryList),
 		...assignRole('Seller', sellerTaxDeclarationList),
-		...assignRole('Buyer', buyerNotaryList),
-		...assignRole("Buyer's Notary", buyerTaxDeclarationList),
+		...assignRole('Buyer', buyerTaxDeclarationList),
+		...assignRole("Buyer's Notary", buyerNotaryList),
 	];
-	console.log(taxList);
-	// !!! CHANGE THE TABLE VALUES
 	return (
-		<>
+		<div id={css.taxes_page}>
 			{locationCheck(location, ['/dashboard/taxes']) ? (
-				<div id={css.taxes_page}>
-					<TaxesTable
-						{...{
-							name: 'Property Taxes',
-							columns: columnNames,
-							rows: taxList,
-							onClickRow: ((e: React.SyntheticEvent) => {
-								const id = getAttr(e.currentTarget as HTMLElement, 'data-id');
-								navigate('/dashboard/taxes/' + id);
-							}) as (e: React.SyntheticEvent) => {},
-						}}
-					/>
-				</div>
+				<TaxesTable
+					{...{
+						name: 'Property Taxes',
+						columns: columnNames,
+						rows: taxList,
+						onClickRow: ((e: React.SyntheticEvent) => {
+							const tax_id = getAttr(e.currentTarget as HTMLElement, 'data-id');
+							if (taxList.find((tax) => tax.id === Number(tax_id))?.completed) return;
+							navigate('/dashboard/taxes/' + tax_id);
+						}) as (e: React.SyntheticEvent) => {},
+						processDataColumn: {
+							'accepted': (num) => {
+								if (num === 0) return 'TBD';
+								if (num === 1) return 'Seller accepted';
+								if (num === 2) return 'Buyer accepted';
+								return 'Both accepted';
+							},
+							'completed': (bool) => {
+								return bool ? 'Yes' : 'No';
+							},
+						},
+					}}
+				/>
 			) : (
-				<></>
+				<Outlet />
 			)}
-			<Outlet />
-		</>
+		</div>
 	);
 };
 

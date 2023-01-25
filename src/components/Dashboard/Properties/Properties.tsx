@@ -5,15 +5,6 @@ import { locationCheck } from '../../../utils/utils';
 import Suspense from '../../Suspense/Suspense';
 import css from './Properties.module.css';
 
-type RealEstate = {
-	id: number;
-	address: string;
-	road_number: number;
-	area_code: number;
-	area_size: number;
-	description: string;
-};
-
 export const PurchaseContext = createContext<{ id?: number }>({});
 
 const Properites = () => {
@@ -50,7 +41,7 @@ const Properites = () => {
 										<p>{estate.description}</p>
 									</div>
 									<Link
-										to={'/dashboard/properties/purchase/' + estate.id}
+										to={'/dashboard/properties/purchase/' + estate.taxDeclaration.id}
 										className={css.purchase_button}
 									>
 										<p>Purchase</p>

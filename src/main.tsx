@@ -13,6 +13,10 @@ import Taxes from './components/Dashboard/Taxes/Taxes';
 import TaxDeclaration from './components/Dashboard/Taxes/TaxDeclaration';
 import AssignNotary from './components/Dashboard/AssignNotary/AssignNotary';
 import Settings from './components/Dashboard/Settings/Settings';
+import Admin from './components/Dashboard/Admin/Admin';
+import UserAdministration from './components/Dashboard/Admin/UserAdministration';
+import PropertyAdministration from './components/Dashboard/Admin/PropertyAdministration';
+import TaxAdministration from './components/Dashboard/Admin/TaxAdministration';
 
 const router = createBrowserRouter([
 	{
@@ -72,6 +76,24 @@ const router = createBrowserRouter([
 					{
 						path: '/dashboard/settings',
 						element: <Settings />,
+					},
+					{
+						path: '/dashboard/administration',
+						element: <Admin />,
+						children: [
+							{
+								path: '/dashboard/administration/user/:id',
+								element: <UserAdministration />,
+							},
+							{
+								path: '/dashboard/administration/property/:id',
+								element: <PropertyAdministration />,
+							},
+							{
+								path: '/dashboard/administration/tax/:id',
+								element: <TaxAdministration />,
+							},
+						],
 					},
 				],
 			},

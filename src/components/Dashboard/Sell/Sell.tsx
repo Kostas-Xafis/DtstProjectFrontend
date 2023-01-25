@@ -31,6 +31,9 @@ const Sell = () => {
 								const id = getAttr(e.currentTarget as HTMLElement, 'data-id');
 								navigate('/dashboard/sell/property/' + id);
 							}) as (e: React.SyntheticEvent) => {},
+							processDataColumn: {
+								'area_size': (area) => area + ' m²',
+							},
 						}}
 					/>
 					<Link id={css.add_property} to={'/dashboard/sell/property'}>

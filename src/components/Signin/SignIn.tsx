@@ -9,8 +9,8 @@ import { Link } from 'react-router-dom';
 import { AuthContext, AuthData } from '../Index';
 
 type SignInBody = {
-	username?: string;
-	password?: string;
+	username: string;
+	password: string;
 	email?: string;
 };
 
@@ -19,33 +19,31 @@ type SignInProps = {
 };
 
 type InputsArray = {
-	username: InputProps;
-	password: InputProps;
-	email?: InputProps;
+	[P in keyof SignInBody]: InputProps;
 };
 
 const SignIn: FC<SignInProps> = ({ signup }) => {
-	const [postData, setPostData] = useState<SignInBody>({});
-	const [fetchData, setFetch] = useFetch<AuthData>({}, true);
+	const [postData, setPostData] = useState<Partial<SignInBody>>({});
+	const [fetchData, setFetch] = useFetch<AuthData>({});
 	const { setAuthData } = useContext(AuthContext);
 	const inputs: InputsArray = {
-		username: {
-			htmlfor: 'username',
-			text: 'Username',
-			type: 'text',
-			placeholder: 'e.g. Jackson',
-			inputIcon: <FaUser />,
+		'username': {
+			'htmlfor': 'username',
+			'text': 'Username',
+			'type': 'text',
+			'placeholder': 'e.g. Jackson',
+			'inputIcon': <FaUser />,
 			setPostData,
 		},
-		password: {
-			htmlfor: 'password',
-			text: 'Password',
-			type: 'password',
-			placeholder: '•••••••••',
-			inputIcon: <FaLock />,
-			validate: true,
-			validate_id: 'pwdValidate',
-			validations: [
+		'password': {
+			'htmlfor': 'password',
+			'text': 'Password',
+			'type': 'password',
+			'placeholder': '•••••••••',
+			'inputIcon': <FaLock />,
+			'validate': true,
+			'validate_id': 'pwdValidate',
+			'validations': [
 				{ regex: 7, msg: '7 or more characters' },
 				{ regex: /[^\w\n ]|(_)/g, msg: '1 special character' },
 				{ regex: /[A-Z]/g, msg: '1 upper case character' },
@@ -53,15 +51,15 @@ const SignIn: FC<SignInProps> = ({ signup }) => {
 			],
 			setPostData,
 		},
-		email: {
-			htmlfor: 'email',
-			text: 'Email:',
-			type: 'text',
-			placeholder: 'anthony@mail.gov',
-			inputIcon: <MdEmail />,
-			validate_id: 'emailValidate',
-			validate: true,
-			validations: [{ regex: /\w+@[a-zA-Z]+[.][\w]{2,3}/g, msg: 'Invalid mail' }],
+		'email': {
+			'htmlfor': 'email',
+			'text': 'Email:',
+			'type': 'text',
+			'placeholder': 'anthony@mail.gov',
+			'inputIcon': <MdEmail />,
+			'validate_id': 'emailValidate',
+			'validate': true,
+			'validations': [{ regex: /\w+@[a-zA-Z]+[.][\w]{2,3}/g, msg: 'Invalid mail' }],
 			setPostData,
 		},
 	};
@@ -78,10 +76,10 @@ const SignIn: FC<SignInProps> = ({ signup }) => {
 		e.preventDefault();
 		e.stopPropagation();
 		if (signup) {
-			if (!(postData.email && postData.password && postData.username)) return;
+			if (!(postData?.email && postData.password && postData.username)) return;
 			setFetch({ 'request': { 'method': 'POST', 'path': '/api/auth/user/signup', 'body': postData } });
 		} else {
-			if (!(postData.password && postData.username)) return;
+			if (!(postData?.password && postData.username)) return;
 			setFetch({ 'request': { 'method': 'POST', 'path': '/api/auth/signin', 'body': postData } });
 		}
 	};
@@ -98,7 +96,7 @@ const SignIn: FC<SignInProps> = ({ signup }) => {
 				'request': {
 					'method': 'POST',
 					'path': '/api/auth/signin',
-					'body': { 'username': postData.username, 'password': postData.password },
+					'body': { 'username': postData?.username, 'password': postData?.password },
 				},
 			});
 	}, [fetchData]);

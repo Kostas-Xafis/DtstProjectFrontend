@@ -1,13 +1,12 @@
 #sell_page {
 	--grid-widths: 4ch 10ch 7ch 7ch 7ch 13ch;
 	--table-width: calc(48ch + 6rem);
-	place-self: center start;
-	padding-left: 4rem;
+	place-self: center;
 	height: 95%;
 	display: grid;
 	grid-template-columns: 1fr;
 	grid-template-rows: auto 80px;
-	place-items: center start;
+	place-items: start center;
 	gap: 2rem;
 }
 

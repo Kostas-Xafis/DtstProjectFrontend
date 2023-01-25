@@ -92,7 +92,7 @@ input[type='password']::-ms-clear {
 	height: 7px;
 }
 ::-webkit-scrollbar-button {
-	width: 5px;
+	width: 2px;
 	color: transparent;
 }
 ::-webkit-scrollbar-thumb {
@@ -105,7 +105,7 @@ input[type='password']::-ms-clear {
 }
 
 ::-webkit-scrollbar-corner {
-	width: 5px;
+	width: 2px;
 	color: transparent;
 }
 

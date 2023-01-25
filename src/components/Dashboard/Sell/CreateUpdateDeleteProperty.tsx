@@ -7,7 +7,7 @@ import { RxRulerSquare } from 'react-icons/rx';
 import css from './Sell.module.css';
 import { useFetch } from '../../../hooks/useFetch';
 import { AuthContext } from '../../Index';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 type RealEstateForm = {
 	[Property in keyof RealEstate]?: RealEstate[Property];
@@ -19,7 +19,6 @@ const CUDProperty = ({ create = true }: { create: boolean }) => {
 	const [postData, setPostData] = useState<RealEstateForm>({});
 	const [fetchData, setFetch] = useFetch<RealEstateForm>({});
 	const { authUser, setAuthUser } = useContext(AuthContext);
-	const navigate = useNavigate();
 	const id = Number(useParams().id);
 	const inputs: { [Property in keyof RealEstateForm]: InputProps } = {
 		'address': {
@@ -127,7 +126,7 @@ const CUDProperty = ({ create = true }: { create: boolean }) => {
 				return user;
 			});
 		}
-		if (response) navigate('/dashboard/sell');
+		if (response) history.back();
 	}, [id, fetchData.response]);
 
 	return (

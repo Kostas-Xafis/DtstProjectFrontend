@@ -31,14 +31,14 @@ const Dashboard = () => {
 		if (isObjectEmpty(authData)) return;
 		if (fetchData.response) {
 			setAuthUser(fetchData.response);
-		} else if (!fetchData.request)
+		} else if (!fetchData.request && !fetchData.error)
 			setFetch({
 				'request': {
 					'method': 'GET',
 					'path': '/api/users/' + authData.id,
 				},
 			});
-	}, [authData, fetchData]);
+	}, [authData, fetchData.response]);
 	const isUser = authData.roles?.includes('ROLE_USER');
 	return (
 		<div id={css.Dashboard}>
@@ -57,13 +57,15 @@ const Dashboard = () => {
 						<Link className={css.sidebar_content} to={'/dashboard/taxes'}>
 							<p className={css.sidebar_button}>Taxes</p>
 						</Link>
-						<Link className={css.sidebar_content} to={'/dashboard/settings'}>
-							<p className={css.sidebar_button}>Settings</p>
-						</Link>
 					</>
 				) : (
-					<></>
+					<Link className={css.sidebar_content} to={'/dashboard/administration'}>
+						<p className={css.sidebar_button}>Administration</p>
+					</Link>
 				)}
+				<Link className={css.sidebar_content} to={'/dashboard/settings'}>
+					<p className={css.sidebar_button}>Settings</p>
+				</Link>
 				<Link onClick={onClickLogOut} className={css.sidebar_content} to={'/'}>
 					<p className={css.sidebar_button}>Log Out</p>
 				</Link>

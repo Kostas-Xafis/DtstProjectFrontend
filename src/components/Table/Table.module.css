@@ -19,6 +19,7 @@
 	position: relative;
 	display: grid;
 	width: var(--table-width);
+	max-width: 640px;
 	height: 100%;
 	max-height: 500px;
 	grid-template-rows: var(--row-height) auto;
@@ -27,6 +28,8 @@
 	border-radius: 15px;
 	background: var(--txt-col);
 	box-shadow: -2px 2px 1px 1px var(--dk-txt-col), -3px 3px 0px 2px var(--txt-col-t6);
+
+	overflow: auto;
 }
 
 .table p {
@@ -39,6 +42,7 @@
 	right: 0px;
 	border-top-left-radius: 15px;
 	border-top-right-radius: 15px;
+	border-color: transparent;
 	background-color: var(--txt-col);
 }
 
@@ -48,14 +52,18 @@
 	grid-template-columns: var(--grid-widths);
 	gap: 0rem 1rem;
 	place-items: start;
-	border-bottom: 2px solid var(--dk-txt-col);
+	border-bottom: 2px solid transparent;
 }
 
 .table_rows {
 	grid-row: 2/3;
 	display: grid;
 	grid-auto-rows: var(--row-height);
-	overflow-x: hidden;
+}
+
+.table_row {
+	position: relative;
+	padding-right: 1rem; /* Fill the remaining 1rem from background*/
 }
 
 .table_row:hover {
@@ -65,26 +73,40 @@
 .table_row:hover p {
 	color: var(--txt-col);
 }
-.table_row:hover > div {
+.table_row:hover > .table_value {
 	border-color: var(--txt-col);
 }
 
 .table_value {
 	width: 100%;
-	height: 40px;
+	height: 100%;
 	display: grid;
 	place-items: center;
-	padding: 0.5rem;
+	padding: 0 0.5rem;
 	text-align: center;
 	overflow: hidden;
 }
 
-.table_col > div,
-.table_row > div {
+.table_col > .table_value {
+	height: 55px;
+}
+
+.table_col > .table_value,
+.table_row > .table_value {
 	border-right: 2px solid var(--dk-txt-col);
 }
 
-.table_col > div:last-child,
-.table_row > div:last-child {
+.table_col > .table_value:nth-child(-1),
+.table_row > .table_value:nth-child(-1) {
 	border-right: none;
+}
+
+.rowBottomBorder {
+	all: unset;
+	position: absolute;
+	top: calc(var(--row-height) - 2px);
+	left: 0px;
+	height: 2px;
+	width: var(--table-width);
+	background-color: var(--dk-txt-col);
 }
