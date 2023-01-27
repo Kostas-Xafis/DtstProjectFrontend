@@ -3,7 +3,7 @@ import { AiOutlinePlus } from 'react-icons/ai';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { getAttr, locationCheck } from '../../../utils/utils';
 import { AuthContext } from '../../Index';
-import css from './Sell.module.css';
+import css from './Sale.module.css';
 import { RealEstateTable } from '../../Table/Table';
 
 const columnNames: Array<[string, keyof RealEstate]> = [
@@ -14,14 +14,14 @@ const columnNames: Array<[string, keyof RealEstate]> = [
 	['Area Size', 'area_size'],
 	['Description', 'description'],
 ];
-const Sell = () => {
+const Sale = () => {
 	const location = useLocation();
 	const { realEstateList } = useContext(AuthContext).authUser;
 	const navigate = useNavigate();
 	return (
 		<>
-			{locationCheck(location, ['/dashboard/sell']) ? (
-				<div id={css.sell_page}>
+			{locationCheck(location, ['/dashboard/sale']) ? (
+				<div id={css.sale_page}>
 					<RealEstateTable
 						{...{
 							name: 'Selling',
@@ -29,14 +29,14 @@ const Sell = () => {
 							rows: realEstateList,
 							onClickRow: ((e: React.SyntheticEvent) => {
 								const id = getAttr(e.currentTarget as HTMLElement, 'data-id');
-								navigate('/dashboard/sell/property/' + id);
+								navigate('/dashboard/sale/property/' + id);
 							}) as (e: React.SyntheticEvent) => {},
 							processDataColumn: {
 								'area_size': (area) => area + ' m²',
 							},
 						}}
 					/>
-					<Link id={css.add_property} to={'/dashboard/sell/property'}>
+					<Link id={css.add_property} to={'/dashboard/sale/post'}>
 						<AiOutlinePlus />
 					</Link>
 				</div>
@@ -48,4 +48,4 @@ const Sell = () => {
 	);
 };
 
-export default Sell;
+export default Sale;

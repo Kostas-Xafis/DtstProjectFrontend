@@ -4,7 +4,7 @@ import { AiOutlineFieldNumber } from 'react-icons/ai';
 import { BsSignpostSplitFill, BsTextParagraph } from 'react-icons/bs';
 import { MdLocationPin } from 'react-icons/md';
 import { RxRulerSquare } from 'react-icons/rx';
-import css from './Sell.module.css';
+import css from './Sale.module.css';
 import { useFetch } from '../../../hooks/useFetch';
 import { AuthContext } from '../../Index';
 import { useParams } from 'react-router-dom';

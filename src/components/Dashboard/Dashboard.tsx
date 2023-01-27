@@ -51,8 +51,8 @@ const Dashboard = () => {
 						<Link className={css.sidebar_content} to={'/dashboard/properties'}>
 							<p className={css.sidebar_button}>Search Properties</p>
 						</Link>
-						<Link className={css.sidebar_content} to={'/dashboard/sell'}>
-							<p className={css.sidebar_button}>Sell Property</p>
+						<Link className={css.sidebar_content} to={'/dashboard/sale'}>
+							<p className={css.sidebar_button}>Property sale</p>
 						</Link>
 						<Link className={css.sidebar_content} to={'/dashboard/taxes'}>
 							<p className={css.sidebar_button}>Taxes</p>
