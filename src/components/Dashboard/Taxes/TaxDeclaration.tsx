@@ -1,7 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState, SyntheticEvent } from 'react';
 import { BsTextParagraph } from 'react-icons/bs';
 import { MdAttachMoney } from 'react-icons/md';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useFetch } from '../../../hooks/useFetch';
 import { getAttr } from '../../../utils/utils';
 import { AuthContext } from '../../Index';
@@ -155,7 +155,7 @@ const Acceptance = ({ tax_id, role }: { tax_id: number; role?: TaxRole }) => {
 	const [fetchData, setFetch] = useFetch({});
 	const [accepted, setAccepted] = useState<boolean>(false);
 	const { setAuthUser } = useContext(AuthContext);
-	const onClick = (e: React.SyntheticEvent) => {
+	const onClick = (e: SyntheticEvent) => {
 		e.preventDefault();
 		e.stopPropagation();
 		const acceptance = getAttr(e.target as HTMLElement, 'data-accept') === 'accept';
@@ -244,7 +244,7 @@ const DeclarationContent = ({ tax_id, role }: { tax_id: number; role?: TaxRole }
 		},
 	};
 
-	const onClick = (e: React.SyntheticEvent) => {
+	const onClick = (e: SyntheticEvent) => {
 		e.preventDefault();
 		e.stopPropagation();
 		if (!(postData?.declaration_content && postData.payment_amount)) return;
@@ -297,7 +297,7 @@ const BuyerPayment = ({ tax_id }: { tax_id: number }) => {
 	const [fetchData, setFetch] = useFetch({});
 	const { setAuthUser } = useContext(AuthContext);
 
-	const onClick = (e: React.SyntheticEvent) => {
+	const onClick = (e: SyntheticEvent) => {
 		e.preventDefault();
 		e.stopPropagation();
 		setFetch({

@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState, useContext } from 'react';
+import { FC, useEffect, useState, useContext, SyntheticEvent } from 'react';
 import Input from '../Inputs';
 import css from './SignIn.module.css';
 import { InputProps } from '../Inputs/Input';
@@ -72,7 +72,7 @@ const SignIn: FC<SignInProps> = ({ signup }) => {
 		delete inputs.password.validations;
 	}
 
-	const onClick = (e: React.SyntheticEvent) => {
+	const onClick = (e: SyntheticEvent) => {
 		e.preventDefault();
 		e.stopPropagation();
 		if (signup) {

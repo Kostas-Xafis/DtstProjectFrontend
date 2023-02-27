@@ -1,5 +1,5 @@
 import { InputInvalidMsg } from './InputInvalidMsg';
-import React, { FC } from 'react';
+import { FC, FocusEvent } from 'react';
 import { InputValidate, Nullable } from '../../utils/utils';
 import css from './Input.module.css';
 import { PwdEye } from './PwdEye';
@@ -42,7 +42,7 @@ export const Input: FC<InputProps> = ({
 	validations = [],
 	setPostData = () => {},
 }) => {
-	let validateInputValues: (e: React.FocusEvent<HTMLElement>) => string[];
+	let validateInputValues: (e: FocusEvent<HTMLElement>) => string[];
 
 	const setData = (value: any) => {
 		setPostData((prevData: any) => {
@@ -50,11 +50,11 @@ export const Input: FC<InputProps> = ({
 			return { ...prevData };
 		});
 	};
-	const onFocus = (e: React.FocusEvent<HTMLElement>) => {
+	const onFocus = (e: FocusEvent<HTMLElement>) => {
 		const curEl = (e.currentTarget as HTMLFormElement).labels[0] as HTMLElement;
 		curEl.classList.add(css.expanded_outline);
 	};
-	const onblur = (e: React.FocusEvent<HTMLElement>) => {
+	const onblur = (e: FocusEvent<HTMLElement>) => {
 		const curEl = e.currentTarget as HTMLFormElement;
 		curEl.labels[0].classList.remove(css.expanded_outline);
 
@@ -79,7 +79,7 @@ export const Input: FC<InputProps> = ({
         ! ++++++++++++++++++++++ 
     */
 	if (validate) {
-		validateInputValues = (e: React.FocusEvent<HTMLElement>): string[] => {
+		validateInputValues = (e: FocusEvent<HTMLElement>): string[] => {
 			const curEl = e.currentTarget as HTMLInputElement;
 			const input = curEl.value;
 			const label = curEl.labels && curEl.labels[0];

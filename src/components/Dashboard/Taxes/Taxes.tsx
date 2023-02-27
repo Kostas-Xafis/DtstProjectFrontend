@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext, SyntheticEvent } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { getAttr, locationCheck } from '../../../utils/utils';
 import { AuthContext } from '../../Index';
@@ -45,11 +45,11 @@ const Taxes = () => {
 						name: 'Property Taxes',
 						columns: columnNames,
 						rows: taxList,
-						onClickRow: ((e: React.SyntheticEvent) => {
+						onClickRow: ((e: SyntheticEvent) => {
 							const tax_id = getAttr(e.currentTarget as HTMLElement, 'data-id');
 							if (taxList.find((tax) => tax.id === Number(tax_id))?.completed) return;
 							navigate('/dashboard/taxes/' + tax_id);
-						}) as (e: React.SyntheticEvent) => {},
+						}) as (e: SyntheticEvent) => {},
 						processDataColumn: {
 							'accepted': (num) => {
 								if (num === 0) return 'TBD';

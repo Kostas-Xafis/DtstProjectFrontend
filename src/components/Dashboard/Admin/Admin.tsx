@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, SyntheticEvent } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useFetch } from '../../../hooks/useFetch';
 import { getAttr, locationCheck } from '../../../utils/utils';
@@ -57,10 +57,10 @@ const Admin = () => {
 							name: 'Users',
 							columns: usersColumns,
 							rows: usersList,
-							onClickRow: ((e: React.SyntheticEvent) => {
+							onClickRow: ((e: SyntheticEvent) => {
 								const id = getAttr(e.currentTarget as HTMLElement, 'data-id');
 								navigate('/dashboard/administration/user/' + id);
-							}) as (e: React.SyntheticEvent) => {},
+							}) as (e: SyntheticEvent) => {},
 							processDataColumn: {
 								'roles': (role) => (role?.length ? role[0].name : ''),
 								'sellerTaxDeclarationList': (list) => list?.length || 0,
@@ -75,10 +75,10 @@ const Admin = () => {
 							name: 'Posted properties',
 							columns: estateColumns,
 							rows: realEstateList,
-							onClickRow: ((e: React.SyntheticEvent) => {
+							onClickRow: ((e: SyntheticEvent) => {
 								const id = getAttr(e.currentTarget as HTMLElement, 'data-id');
 								navigate('/dashboard/administration/property/' + id);
-							}) as (e: React.SyntheticEvent) => {},
+							}) as (e: SyntheticEvent) => {},
 							processDataColumn: {
 								'area_size': (area) => area + ' m²',
 								'taxDeclaration': (tax) => tax?.id || '',
@@ -90,11 +90,11 @@ const Admin = () => {
 							name: 'Property Taxes',
 							columns: taxesColumns,
 							rows: taxesList,
-							onClickRow: ((e: React.SyntheticEvent) => {
+							onClickRow: ((e: SyntheticEvent) => {
 								const tax_id = getAttr(e.currentTarget as HTMLElement, 'data-id');
 								if (taxesList.find((tax) => tax.id === Number(tax_id))?.completed) return;
 								navigate('/dashboard/administration/tax/' + tax_id);
-							}) as (e: React.SyntheticEvent) => {},
+							}) as (e: SyntheticEvent) => {},
 							processDataColumn: {
 								'accepted': (num) => {
 									if (num === 0) return 'TBD';

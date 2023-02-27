@@ -1,6 +1,5 @@
-import { useState, useEffect, CSSProperties } from "react";
-import { FC } from "react";
-import css from "./Input.module.css";
+import { useState, useEffect, CSSProperties } from 'react';
+import css from './Input.module.css';
 
 type InputInvalidMsgProp = { parentId: string };
 
@@ -8,7 +7,7 @@ function getRectPos(elem: HTMLElement) {
 	return elem.getBoundingClientRect();
 }
 
-export const InputInvalidMsg: FC<InputInvalidMsgProp> = ({ parentId }) => {
+export const InputInvalidMsg = ({ parentId }: { parentId: string }) => {
 	const [validMessages, setMessages] = useState<string[]>([]);
 
 	useEffect(() => {
@@ -18,12 +17,12 @@ export const InputInvalidMsg: FC<InputInvalidMsgProp> = ({ parentId }) => {
 		//leftValue = labelcontainer width + 4vw padding + 40pixels star + 40pixels triangle + 10px spacing
 		if (!label || !msgContainer) return;
 		const leftValue = getRectPos(label as HTMLElement).width + 55;
-		msgBox.style.setProperty("left", leftValue + "px");
-		msgBox.addEventListener("updateContent", (e: CustomEventInit<string[]>) => {
-			if (matchMedia("(hover:none").matches) {
+		msgBox.style.setProperty('left', leftValue + 'px');
+		msgBox.addEventListener('updateContent', (e: CustomEventInit<string[]>) => {
+			if (matchMedia('(hover:none').matches) {
 				(msgContainer.parentNode as HTMLElement).style.setProperty(
-					"display",
-					e.detail?.length ? "block" : "none"
+					'display',
+					e.detail?.length ? 'block' : 'none'
 				);
 			}
 			setMessages(e.detail || []);
@@ -31,12 +30,12 @@ export const InputInvalidMsg: FC<InputInvalidMsgProp> = ({ parentId }) => {
 	});
 
 	return (
-		<div id={parentId} className={css.ValidateMsg} style={{ display: validMessages.length ? "grid" : "none" }}>
+		<div id={parentId} className={css.ValidateMsg} style={{ display: validMessages.length ? 'grid' : 'none' }}>
 			<div className={css.invalidMsgContainer}>
 				{validMessages.map((message, i) => (
 					<p
 						key={i}
-						style={{ "--row": Math.floor(100 * Math.log(i + 1)) + "ms" } as CSSProperties}
+						style={{ '--row': Math.floor(100 * Math.log(i + 1)) + 'ms' } as CSSProperties}
 						className={css.InvalidMsgText}
 					>
 						{message}

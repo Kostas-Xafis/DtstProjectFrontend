@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { SyntheticEvent } from 'react';
 import { useParams } from 'react-router-dom';
 import { useFetch } from '../../../hooks/useFetch';
 import css from './Admin.module.css';
@@ -7,7 +7,7 @@ const Delete = ({ text, path, btnText }: { text: string; path: string; btnText?:
 	const id = Number(useParams().id);
 	const [fetchData, setFetch] = useFetch({});
 
-	const onClick = (e: React.SyntheticEvent) => {
+	const onClick = (e: SyntheticEvent) => {
 		e.preventDefault();
 		e.stopPropagation();
 

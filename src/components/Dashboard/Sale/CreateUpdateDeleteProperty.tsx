@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext, SyntheticEvent } from 'react';
 import { Input, InputProps } from '../../Inputs/Input';
 import { AiOutlineFieldNumber } from 'react-icons/ai';
 import { BsSignpostSplitFill, BsTextParagraph } from 'react-icons/bs';
@@ -62,7 +62,7 @@ const CUDProperty = ({ create = true }: { create: boolean }) => {
 		},
 	};
 
-	const onClickCURealEstate = (e: React.SyntheticEvent) => {
+	const onClickCURealEstate = (e: SyntheticEvent) => {
 		e.preventDefault();
 		e.stopPropagation();
 		if (
@@ -91,7 +91,7 @@ const CUDProperty = ({ create = true }: { create: boolean }) => {
 			});
 	};
 
-	const onClickDeleteRealEstate = (e: React.SyntheticEvent) => {
+	const onClickDeleteRealEstate = (e: SyntheticEvent) => {
 		e.preventDefault();
 		e.stopPropagation();
 		setFetch({

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import { useContext, useEffect, SyntheticEvent } from 'react';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { isObjectEmpty, locationCheck } from '../../utils/utils';
 import { useFetch } from '../../hooks/useFetch';
@@ -12,13 +12,13 @@ const Dashboard = () => {
 	const { authData, setAuthData, setAuthUser } = useContext(AuthContext);
 	const navigate = useNavigate();
 
-	const onClickBack = (e: React.SyntheticEvent) => {
+	const onClickBack = (e: SyntheticEvent) => {
 		e.preventDefault();
 		e.stopPropagation();
 		history.back();
 	};
 
-	const onClickLogOut = (e: React.SyntheticEvent) => {
+	const onClickLogOut = (e: SyntheticEvent) => {
 		e.preventDefault();
 		e.stopPropagation();
 		setFetch({ 'request': { 'method': 'POST', 'path': '/api/auth/logout' } });

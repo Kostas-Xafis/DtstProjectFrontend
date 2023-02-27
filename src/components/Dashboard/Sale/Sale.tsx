@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext, SyntheticEvent } from 'react';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { getAttr, locationCheck } from '../../../utils/utils';
@@ -27,10 +27,10 @@ const Sale = () => {
 							name: 'Selling',
 							columns: columnNames,
 							rows: realEstateList,
-							onClickRow: ((e: React.SyntheticEvent) => {
+							onClickRow: ((e: SyntheticEvent) => {
 								const id = getAttr(e.currentTarget as HTMLElement, 'data-id');
 								navigate('/dashboard/sale/property/' + id);
-							}) as (e: React.SyntheticEvent) => {},
+							}) as (e: SyntheticEvent) => {},
 							processDataColumn: {
 								'area_size': (area) => area + ' m²',
 							},
