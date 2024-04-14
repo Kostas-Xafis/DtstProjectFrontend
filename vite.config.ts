@@ -13,6 +13,21 @@ export default defineConfig({
 				target: "http://localhost:8000/",
 				changeOrigin: true,
 			},
+
 		},
+		strictPort: true,
 	},
+	preview: {
+		port: 7000,
+		open: true,
+		host: "localhost",
+		proxy: {
+			"/api": {
+				target: "http://localhost:8000/",
+				changeOrigin: true,
+			},
+		},
+
+		strictPort: true,
+	}
 });
