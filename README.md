@@ -7,5 +7,9 @@ cd DtstProjectFrontend
 
 npm install
 
+# Run the app in development mode
 npm run dev
+
+# Run the app in production mode
+npm run build
 ```
