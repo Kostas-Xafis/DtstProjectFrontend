@@ -5,7 +5,7 @@ pipeline {
         GITHUB_TOKEN = credentials('Github-Token')
         DOCKER_USER = 'Kostas-Xafis'
         DOCKER_SERVER = 'ghcr.io'
-        DOCKER_PREFIX = 'ghcr.io/Kostas-Xafis/devops-frontend'
+        DOCKER_PREFIX = 'ghcr.io/kostas-xafis/devops-frontend'
     }
 
     stages {
