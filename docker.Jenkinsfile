@@ -9,7 +9,7 @@ pipeline {
     }
 
     stages {
-        stages('Checkout') {
+        stage('Checkout') {
             steps {
                 git branch: 'main', url: 'git@github.com:Kostas-Xafis/DtstProjectFrontend.git'
             }
